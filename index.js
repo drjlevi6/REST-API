@@ -2,6 +2,15 @@ const express = require('express'),
 	morgan = require('morgan');
 const app = express();
 
+let users = [
+	{
+		username: "User A";
+	},
+	{
+		username: "User B";
+	},
+]
+
 let topMovies = [
 	{
 		name: "Under Seige",
