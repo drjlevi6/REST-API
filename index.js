@@ -187,8 +187,8 @@ app.get('/movies', (req, res) => {
 });
 
 //	Following request returns data about a single movie, selected by title by the user; 
-// data comprises
-// (description, genre, director, image URL, whether movie’s featured or not)
+// data comprises description, genre, director, image URL, and
+// whether movie’s featured or not.
 app.get('/movies/:name', (req, res) => {
 	let movieToFind = req.params.name
 	let movieData = topMovies.find(item => {
@@ -208,19 +208,25 @@ app.get('/documentation', (req, res) => {
 //POST requests
 // Allow new users to register
 app.post('/users', (req, res) => {
-	const userName = {
-		username: req.body.username,
-	}
+	const userName = { username: req.body.username, }
 	users.push(userName);
 	res.send(users);
 });
 
-// PUT requests
-// Allow users to update their user info (username)
+// PUT request:
+// Allow users to update their user info (currently username only)
 app.put('/users/:username/:newname', (req, res) => {
-	console.log("Old name:", req.params.username);  // this works
-	console.log("New name:", req.params.newname);  // so does this!
-  });
+	const oldName = req.params.username,
+		newName = req.params.newname;
+	const user = users.find((user) => {
+		return user.username === req.params.username;
+	});
+	if(user) {
+		res.status(201).send(user);
+	} else {
+		res.status(404).send("User with name “" + oldName + "” was not found.");
+	}	
+});
 
 
 app.listen(8080, () => {
