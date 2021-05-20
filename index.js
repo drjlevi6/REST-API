@@ -218,7 +218,7 @@ app.post('/users', (req, res) => {
 app.put('/users/:username/:newname', (req, res) => {
 	const oldName = req.params.username,
 		newName = req.params.newname;
-	const user = users.find((user) => {
+	const user = users.find(user => {
 		return user.username === req.params.username;
 	});
 	if(user) {
