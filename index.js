@@ -172,7 +172,7 @@ app.get('/movies/director/:name', (req, res) => {
 //	a text that a movie has been added—more on this later) POST
 // Allow users to remove a movie from their list of favorites (showing DELETE
 //	only a text that a movie has been removed—more on this later)
-// Allow existing users to deregister (showing only a text that a user DLETE
+// Allow existing users to deregister (showing only a text that a user DELETE
 //	email has been removed—more on this later)
 
 // GET requests
