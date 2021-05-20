@@ -167,12 +167,12 @@ app.get('/movies/director/:name', (req, res) => {
 	res.json(byDirector);
 })
 
-// Allow users to update their user info (username)
+// Allow users to update their user info (username) PUT
 // Allow users to add a movie to their list of favorites (showing only 
-//	a text that a movie has been added—more on this later)
-// Allow users to remove a movie from their list of favorites (showing 
+//	a text that a movie has been added—more on this later) POST
+// Allow users to remove a movie from their list of favorites (showing DELETE
 //	only a text that a movie has been removed—more on this later)
-// Allow existing users to deregister (showing only a text that a user 
+// Allow existing users to deregister (showing only a text that a user DLETE
 //	email has been removed—more on this later)
 
 // GET requests
@@ -217,9 +217,11 @@ app.post('/users', (req, res) => {
 
 // PUT requests
 // Allow users to update their user info (username)
-app.put('/users', (req, res) => {
+app.put('/users/:username/:newname', (req, res) => {
+	console.log("Old name:", req.params.username);  // this works
+	console.log("New name:", req.params.newname);  // so does this!
+  });
 
-})
 
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080.');
