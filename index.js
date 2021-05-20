@@ -1,13 +1,13 @@
-const express = require('express'),
-	morgan = require('morgan');
+const express = require('express');
+const morgan = require('morgan');
 const app = express();
 
 let users = [
 	{
-		username: "User A";
+		username: "User A",
 	},
 	{
-		username: "User B";
+		username: "User B",
 	},
 ]
 
@@ -134,6 +134,7 @@ let topMovies = [
 	}
 ];
 
+app.use(express.json());	// never forget this!!
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use((err, req, res, next) => {
@@ -147,10 +148,25 @@ app.use((err, req, res, next) => {
 // x Return a list of ALL movies to the user
 // x Return data (description, genre, director, image URL, whether it’s 
 //	featured or not) about a single movie by title to the user
-// Return data about a genre (description) by name/title (e.g., 
+// x Return data about a genre (description) by name/title (e.g., 
 //	“Thriller”)
+app.get('/movies/genre/:genre', (req, res) => { //attaches to req.params
+	const genre = req.params.genre;
+	const filteredMovies = topMovies.filter(movie => {
+		return movie.genre === genre;
+	})
+	res.json(filteredMovies);
+})
 // Return data about a director (bio, birth year, death year) by name
-// Allow new users to register
+app.get('/movies/director/:name', (req, res) => {
+	console.log(req.params);
+	const directorName = req.params.name;
+	const byDirector = topMovies.filter(movie => {
+		return movie.director.name === directorName;
+	} )
+	res.json(byDirector);
+})
+
 // Allow users to update their user info (username)
 // Allow users to add a movie to their list of favorites (showing only 
 //	a text that a movie has been added—more on this later)
@@ -189,7 +205,22 @@ app.get('/documentation', (req, res) => {
 	res.sendFile('public/documentation.html', { root: __dirname });
 });
 
+//POST requests
+// Allow new users to register
+app.post('/users', (req, res) => {
+	const userName = {
+		username: req.body.username,
+	}
+	users.push(userName);
+	res.send(users);
+});
+
+// PUT requests
+// Allow users to update their user info (username)
+app.put('/users', (req, res) => {
+
+})
+
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080.');
 });
-
