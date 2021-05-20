@@ -141,15 +141,37 @@ app.use((err, req, res, next) => {
 	res.status(500).send('Something broke!');
 });
 
+// As defined in your project brief (PDF), the REST API must do the 
+//	following:
+// 
+// x Return a list of ALL movies to the user
+// x Return data (description, genre, director, image URL, whether it’s 
+//	featured or not) about a single movie by title to the user
+// Return data about a genre (description) by name/title (e.g., 
+//	“Thriller”)
+// Return data about a director (bio, birth year, death year) by name
+// Allow new users to register
+// Allow users to update their user info (username)
+// Allow users to add a movie to their list of favorites (showing only 
+//	a text that a movie has been added—more on this later)
+// Allow users to remove a movie from their list of favorites (showing 
+//	only a text that a movie has been removed—more on this later)
+// Allow existing users to deregister (showing only a text that a user 
+//	email has been removed—more on this later)
 
 // GET requests
+// Get the student data base
+app.get('/students', (req, res) => {
+	res.send('Successful GET request returning data on all the students');
+  });
 
 // Following request returns the app's list of current top movies
 app.get('/movies', (req, res) => {
 	res.json(topMovies);
 });
 
-//	Following request returns data about a single movie, selected by title by the user; data comprises
+//	Following request returns data about a single movie, selected by title by the user; 
+// data comprises
 // (description, genre, director, image URL, whether movie’s featured or not)
 app.get('/movies/:name', (req, res) => {
 	let movieToFind = req.params.name
