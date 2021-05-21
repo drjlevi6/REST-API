@@ -218,10 +218,11 @@ app.post('/users/:username/:favmovie', (req, res) => {
 	const userName = req.params.username,
 		favMovie = req.params.favmovie;
 	console.log('User', req.params.username, 'entered favorite movie “' + favMovie + '”.');
+	res.status(404).send('User ' + userName + ' will add favorite movie “' + favMovie + '”.');
 })
 
 // PUT request:
-// Allow users to update their user info (currently username only)
+// Allow user to update their user info (currently username only)
 app.put('/users/:username/:newname', (req, res) => {
 	const oldName = req.params.username,
 		newName = req.params.newname;
@@ -235,6 +236,14 @@ app.put('/users/:username/:newname', (req, res) => {
 	}	
 });
 
+// DELETE requests:
+// Allow user to remove a movie from list of favorites (currently message only)
+app.delete('/users/:username/:favmovie', (req, res) => {
+	const userName = req.params.username,
+		favMovie = req.params.favmovie;
+	console.log(userName, 'will delete favorite movie “' + favMovie + '”');
+	res.status(201).send(userName + ' will delete favorite movie “' + favMovie + '”.');
+})
 
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080.');
