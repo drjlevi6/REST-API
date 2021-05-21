@@ -177,7 +177,7 @@ app.get('/movies/director/:name', (req, res) => {
 // GET requests
 // Get the student data base
 app.get('/users', (req, res) => {
-	res.send('Successful GET request returning data on all the users');
+	res.json(users);
   });
 
 // Following request returns the app's list of current top movies
@@ -206,11 +206,19 @@ app.get('/documentation', (req, res) => {
 
 //POST requests
 // Allow new users to register
-app.post('/users', (req, res) => {
+app.post('/users/:username', (req, res) => {
+	console.log("New User:",req.body.username);
 	const userName = { username: req.body.username, }
 	users.push(userName);
 	res.send(users);
 });
+
+// Allow registered user to add to list of favorite movies
+app.post('/users/:username/:favmovie', (req, res) => {
+	const userName = req.params.username,
+		favMovie = req.params.favmovie;
+	console.log('User', req.params.username, 'entered favorite movie “' + favMovie + '”.');
+})
 
 // PUT request:
 // Allow users to update their user info (currently username only)
