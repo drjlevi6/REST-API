@@ -2,13 +2,19 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 
-let users = [
+let users = [ // needs username, password, email, date of birth
 	{
-		username: "User A",
+		username: "UserA",
+		password: "UserAPassword",
+		email: "UserA@gmail.com",
+		DOB: "01/01/2000"
 	},
 	{
-		username: "User B",
-	},
+		username: "UserB",
+		password: "UserBPassword",
+		email: "UserB@gmail.com",
+		DOB: "01/01/2000"
+},
 ]
 
 let topMovies = [
@@ -142,13 +148,8 @@ app.use((err, req, res, next) => {
 	res.status(500).send('Something broke!');
 });
 
-// As defined in your project brief (PDF), the REST API must do the 
-//	following:
-// 
-// x Return data (description, genre, director, image URL, whether it’s 
-// x	featured or not) about a single movie by title to the user
-// x Return data about a genre (description) by name/title (e.g., 
-// x	“Thriller”)
+// GET requests:
+// Get a movie’s genre
 app.get('/movies/genre/:genre', (req, res) => { //attaches to req.params
 	const genre = req.params.genre;
 	const filteredMovies = topMovies.filter(movie => {
@@ -156,7 +157,8 @@ app.get('/movies/genre/:genre', (req, res) => { //attaches to req.params
 	})
 	res.json(filteredMovies);
 })
-// Return data about a director (bio, birth year, death year) by name
+
+// Get data about a director (bio, birth year, death year) by name
 app.get('/movies/director/:name', (req, res) => {
 	console.log(req.params);
 	const directorName = req.params.name;
@@ -166,26 +168,17 @@ app.get('/movies/director/:name', (req, res) => {
 	res.json(byDirector);
 })
 
-//  X Allow users to update their user info (username) PUT
-// Allow users to add a movie to their list of favorites (showing only 
-//		a text that a movie has been added—more on this later) POST
-// Allow users to remove a movie from their list of favorites (showing DELETE
-//	only a text that a movie has been removed—more on this later)
-// Allow existing users to deregister (showing only a text that a user DELETE
-//	email has been removed—more on this later)
-
-// GET requests
 // Get the student data base
 app.get('/users', (req, res) => {
 	res.json(users);
   });
 
-// Following request returns the app's list of current top movies
+// Get entire list of current top movies
 app.get('/movies', (req, res) => {
 	res.json(topMovies);
 });
 
-//	Following request returns data about a single movie, selected by title by the user; 
+// Get data about a single movie, selected by title by the user: 
 // data comprises description, genre, director, image URL, and
 // whether movie’s featured or not.
 app.get('/movies/:name', (req, res) => {
@@ -243,7 +236,21 @@ app.delete('/users/:username/:favmovie', (req, res) => {
 		favMovie = req.params.favmovie;
 	console.log(userName, 'will delete favorite movie “' + favMovie + '”');
 	res.status(201).send(userName + ' will delete favorite movie “' + favMovie + '”.');
-})
+});
+
+// Delete a user (user enters name; message also lists email)
+app.delete('/users/:username/', (req, res) => {
+	const userName = req.params.username;
+	const user = users.find(user => {
+		return user.username === userName;
+	});
+	if(user) {
+		res.status(201).send('User “' + user.username + '” with email “' + user.email +
+			'” will be deleted.');
+	} else {
+		res.status(404).send("User “" + userName + "” wasn’t found.");
+	}	
+});
 
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080.');
