@@ -168,7 +168,7 @@ app.get('/movies/director/:name', (req, res) => {
 	res.json(byDirector);
 })
 
-// Get the student data base
+// Get the user data base
 app.get('/users', (req, res) => {
 	res.json(users);
   });
@@ -190,7 +190,7 @@ app.get('/movies/:name', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-	res.send('Welcome to Jonathan Levi\'s book club!');
+	res.send('Welcome to Jonathan Levi\'s movie app!');
 });
 
 app.get('/documentation', (req, res) => {

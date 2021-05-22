@@ -4,15 +4,72 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Movie Inspector</title>
-        <link rel="shortcut icon" href="img/favicon.ico" type="image/ico" />
+		<link rel="stylesheet" type="text/css" href="css/styles.css" />
     </head>
 
     <body>
         <div>
-            Dr. Levi's generalized reference document will allow its users to 
-            obtain a variety of information about movies, including lists of 
-            them, their actors, their directors, and selected information 
-            about those directors.
+            Dr. Levi's movie app will allow its users to 
+            obtain a variety of information about movies, including lists,
+            their actors, their directors, and selected information 
+            about those directors. The requests, URLs and responses are:
+        </div>
+        <p></p>
+        <div>
+        	<table class="Movie-data">
+         		<tr>
+        			<td>Method Type</td><td>Query Parameters</td>
+        			<td>Response</td>
+        		</tr>
+         		<tr>
+        			<td>get</td><td>/movies/genre/genre</td>
+        			<td>Get a movie’s genre</td>
+        		</tr>
+         		<tr>
+        			<td>get</td><td>/movies/director/name</td>
+        			<td>Get data about a director (bio, birth year, death year) by name</td>
+        		</tr>
+         		<tr>
+        			<td>get</td><td>/users</td>
+        			<td>Get the user data base</td>
+        		</tr>
+         		<tr>
+        			<td>get</td><td>/movies</td>
+        			<td>Get entire list of current top movies</td>
+        		</tr>
+         		<tr>
+        			<td>get</td><td>/movies/name</td>
+        			<td>Get data about a single movie, selected by title by the user</td>
+        		</tr>
+         		<tr>
+        			<td>get</td><td>/</td>
+        			<td>Send generic welcome message</td>
+        		</tr>
+         		<tr>
+        			<td>get</td><td>/documentation</td>
+        			<td>Gets this documentation file</td>
+        		</tr>
+         		<tr>
+        			<td>post</td><td>/users/username</td>
+        			<td>Allow new user to register</td>
+        		</tr>
+         		<tr>
+        			<td>post</td><td>/users/username/favmovie</td>
+        			<td>Registered user adds to list of favorite movies</td>
+        		</tr>
+         		<tr>
+        			<td>put</td><td>/users/username/newname</td>
+        			<td>Allow user to update their user info</td>
+        		</tr>
+         		<tr>
+        			<td>delete</td><td>/users/username/favmovie</td>
+        			<td>Allow user to remove a movie from list of favorites </td>
+        		</tr>
+         		<tr>
+        			<td>delete</td><td>/users/username/</td>
+        			<td>Delete a user</td>
+        		</tr>
+       	</table>
         </div>
         <!--<div>
         	And here's another paragraph.
