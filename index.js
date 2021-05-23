@@ -237,7 +237,6 @@ app.put('/users/:username/:newname', (req, res) => {
 app.delete('/users/:username/:favmovie', (req, res) => {
 	const userName = req.params.username,
 		favMovie = req.params.favmovie;
-	console.log(userName, 'will delete favorite movie “' + favMovie + '”');
 	res.status(201).send(userName + ' will delete favorite movie “' + favMovie + '”.');
 });
 
