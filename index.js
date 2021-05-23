@@ -200,9 +200,9 @@ app.get('/documentation', (req, res) => {
 //POST requests
 // Allow new users to register
 app.post('/users/:username', (req, res) => {
-	console.log("New User:",req.body.username);
-	const userName = { username: req.body.username, }
-	users.push(userName);
+	const newUserName = req.params.username;
+	const newUser = { username: newUserName }
+	users.push(newUser);
 	res.send(users);
 });
 
