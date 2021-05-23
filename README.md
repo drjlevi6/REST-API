@@ -1,2 +1,2 @@
 # REST-API
-Implement the required Postman POST requests
+Implement CareerFoundry Exdercise 2.5's required Postman PUT request
