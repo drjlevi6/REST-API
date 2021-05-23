@@ -237,7 +237,6 @@ app.put('/users/:username/:newname', (req, res) => {
 app.delete('/users/:username/:favmovie', (req, res) => {
 	const userName = req.params.username,
 		favMovie = req.params.favmovie;
-	console.log(userName, 'will delete favorite movie “' + favMovie + '”');
 	res.status(201).send(userName + ' will delete favorite movie “' + favMovie + '”.');
 });
 
@@ -248,7 +247,7 @@ app.delete('/users/:username/', (req, res) => {
 		return user.username === userName;
 	});
 	if(user) {
-		res.status(201).send('User “' + user.username + '” with email “' + user.email +
+		res.status(201).send('Email address “' + user.email + '” of user “' + user.username +
 			'” will be deleted.');
 	} else {
 		res.status(404).send("User “" + userName + "” wasn’t found.");
