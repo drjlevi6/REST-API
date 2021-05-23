@@ -202,7 +202,10 @@ app.get('/documentation', (req, res) => {
 app.post('/users/:username', (req, res) => {
 	const newUserName = req.params.username;
 	const newUser = { username: newUserName }
-	users.push(newUser);
+	newUser.password = '('+ newUserName + ' to add)';
+	newUser.email = '('+ newUserName + ' to add)';
+	newUser.DOB = '('+ newUserName + ' to add)';
+users.push(newUser);
 	res.send(users);
 });
 
@@ -210,8 +213,7 @@ app.post('/users/:username', (req, res) => {
 app.post('/users/:username/:favmovie', (req, res) => {
 	const userName = req.params.username,
 		favMovie = req.params.favmovie;
-	console.log('User', req.params.username, 'entered favorite movie “' + favMovie + '”.');
-	res.status(404).send('User ' + userName + ' will add favorite movie “' + favMovie + '”.');
+	res.status(404).send('User “' + userName + '” will add favorite movie “' + favMovie + '”.');
 })
 
 // PUT request:
