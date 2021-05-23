@@ -222,9 +222,10 @@ app.put('/users/:username/:newname', (req, res) => {
 	const oldName = req.params.username,
 		newName = req.params.newname;
 	const user = users.find(user => {
-		return user.username === req.params.username;
+		return user.username === oldName;
 	});
 	if(user) {
+		user.username = newName;
 		res.status(201).send(user);
 	} else {
 		res.status(404).send("User with name “" + oldName + "” was not found.");
