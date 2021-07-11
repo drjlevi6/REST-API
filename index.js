@@ -166,7 +166,7 @@ app.get('/movies/director/:name', (req, res) => {
 		return movie.director.name === directorName;
 	} )
 	res.json(byDirector);
-})
+});
 
 // Get the user data base
 app.get('/users', (req, res) => {
